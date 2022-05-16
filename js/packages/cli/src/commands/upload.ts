@@ -15,6 +15,8 @@ import fs from 'fs';
 import { PromisePool } from '@supercharge/promise-pool';
 import { loadCache, saveCache } from '../helpers/cache';
 import { arweaveUpload } from '../helpers/upload/arweave';
+import { shadowDriveUpload } from '../helpers/upload/shadow-drive';
+
 import {
   makeArweaveBundleUploadGenerator,
   withdrawBundlr,
@@ -43,6 +45,7 @@ export async function uploadV2({
   pinataJwt,
   pinataGateway,
   awsS3Bucket,
+  shadowDriveStorageAccountPublicKey,
   batchSize,
   price,
   treasuryWallet,
@@ -74,6 +77,7 @@ export async function uploadV2({
   pinataJwt: string;
   pinataGateway: string;
   awsS3Bucket: string;
+  shadowDriveStorageAccountPublicKey: string;
   batchSize: number;
   price: BN;
   treasuryWallet: PublicKey;
@@ -349,6 +353,15 @@ export async function uploadV2({
                   image,
                   animation,
                   manifestBuffer,
+                );
+                break;
+              case StorageType.ShadowDrive:
+                [link, imageLink, animationLink] = await shadowDriveUpload(
+                  walletKeyPair,
+                  image,
+                  animation,
+                  manifestBuffer,
+                  shadowDriveStorageAccountPublicKey,
                 );
                 break;
               case StorageType.Arweave:

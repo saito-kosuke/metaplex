@@ -144,6 +144,7 @@ programCommand('upload')
       pinataGateway,
       arweaveJwk,
       awsS3Bucket,
+      shadowDriveStorageAccountPublicKey,
       retainAuthority,
       mutable,
       batchSize,
@@ -193,6 +194,14 @@ programCommand('upload')
     if (storage === StorageType.Aws && !awsS3Bucket) {
       throw new Error(
         'aws selected as storage option but existing bucket name (--aws-s3-bucket) not provided.',
+      );
+    }
+    if (
+      storage === StorageType.ShadowDrive &&
+      !shadowDriveStorageAccountPublicKey
+    ) {
+      throw new Error(
+        'Shadow Drive selected as storage option but Shadow Drive storage account public key was not provided.',
       );
     }
 
@@ -283,6 +292,7 @@ programCommand('upload')
         pinataJwt,
         pinataGateway,
         awsS3Bucket,
+        shadowDriveStorageAccountPublicKey,
         batchSize,
         price,
         treasuryWallet,

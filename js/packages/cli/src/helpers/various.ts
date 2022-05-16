@@ -33,6 +33,7 @@ export async function getCandyMachineV2Config(
   pinataJwt: string;
   pinataGateway: string;
   awsS3Bucket: string;
+  shadowDriveStorageAccountPublicKey: string;
   retainAuthority: boolean;
   mutable: boolean;
   batchSize: number;
@@ -77,6 +78,7 @@ export async function getCandyMachineV2Config(
     pinataJwt,
     pinataGateway,
     awsS3Bucket,
+    shadowDriveStorageAccountPublicKey,
     noRetainAuthority,
     noMutable,
     batchSize,
@@ -209,6 +211,7 @@ export async function getCandyMachineV2Config(
     pinataJwt,
     pinataGateway: pinataGateway ? pinataGateway : null,
     awsS3Bucket,
+    shadowDriveStorageAccountPublicKey,
     retainAuthority: !noRetainAuthority,
     mutable: !noMutable,
     batchSize,
